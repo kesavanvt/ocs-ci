@@ -902,6 +902,8 @@ def dc_pod_factory(
         service_account=None,
         size=None,
         custom_data=None,
+        node_name=None,
+        node_selector=None,
         replica_count=1,
         raw_block_pv=False,
         sa_obj=None,
@@ -918,6 +920,9 @@ def dc_pod_factory(
             custom_data (dict): If provided then Pod object is created
                 by using these data. Parameter `pvc` is not used but reference
                 is set if provided.
+            node_name (str): The name of specific node to schedule the pod
+            node_selector (dict): dict of key-value pair to be used for nodeSelector field
+                                    eg: {'nodetype': 'app-pod'}
             replica_count (int): Replica count for deployment config
             raw_block_pv (str): True if pod with raw block pvc
             sa_obj (object) : If specific service account is needed
@@ -926,13 +931,13 @@ def dc_pod_factory(
         if custom_data:
             dc_pod_obj = helpers.create_resource(**custom_data)
         else:
-
             pvc = pvc or pvc_factory(interface=interface, size=size)
             sa_obj = sa_obj or service_account_factory(project=pvc.project, service_account=service_account)
             dc_pod_obj = helpers.create_pod(
                 interface_type=interface, pvc_name=pvc.name, do_reload=False,
                 namespace=pvc.namespace, sa_name=sa_obj.name, dc_deployment=True,
-                replica_count=replica_count, raw_block_pv=raw_block_pv
+                replica_count=replica_count, node_name=node_name, node_selector=node_selector,
+                raw_block_pv=raw_block_pv, pod_dict_path=constants.FEDORA_DC_YAML
             )
         instances.append(dc_pod_obj)
         log.info(dc_pod_obj.name)
