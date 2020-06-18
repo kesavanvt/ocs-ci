@@ -49,7 +49,12 @@ setup(
         'numpy',
         'python-ipmi',
         'scipy',
-        'PrettyTable'
+        'PrettyTable',
+        'azure-common==1.1.25',
+        'azure-mgmt-compute==12.0.0',
+        'azure-mgmt-network==10.2.0',
+        'azure-mgmt-resource==10.0.0',
+        'msrestazure==0.6.3'
     ],
     entry_points={
         'console_scripts': [
