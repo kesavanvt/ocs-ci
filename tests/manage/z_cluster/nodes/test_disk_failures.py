@@ -104,7 +104,6 @@ class TestDiskFailures(ManageTest):
         """
         self.sanity_helpers = Sanity()
 
-    @aws_platform_required
     @pytest.mark.polarion_id("OCS-1085")
     @bugzilla('1825675')
     def test_detach_attach_worker_volume(self, nodes, pvc_factory, pod_factory):
@@ -145,7 +144,6 @@ class TestDiskFailures(ManageTest):
         # TODO: Remove 'tries=100'
         self.sanity_helpers.health_check(tries=100)
 
-    @aws_platform_required
     @pytest.mark.polarion_id("OCS-1086")
     def test_detach_attach_2_data_volumes(self, nodes, pvc_factory, pod_factory):
         """
