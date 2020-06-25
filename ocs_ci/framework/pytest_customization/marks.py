@@ -102,6 +102,12 @@ aws_platform_required = pytest.mark.skipif(
     reason="Test runs ONLY on AWS deployed cluster"
 )
 
+cloud_platform_required= pytest.mark.skipif(
+    config.ENV_DATA['platform'].lower() != 'aws'
+    and config.ENV_DATA['platform'].lower() != 'azure',
+    reason="Test runs ONLY on AWS, AZURE deployed cluster"
+)
+
 rh_internal_lab_required = pytest.mark.skipif(
     (config.ENV_DATA['platform'].lower() == 'aws'
         or config.ENV_DATA['platform'].lower() == 'azure'),
