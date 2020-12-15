@@ -18,12 +18,14 @@ from ocs_ci.ocs import metrics
 from ocs_ci.ocs.resources import pod
 from ocs_ci.utility.prometheus import PrometheusAPI, check_query_range_result_enum
 from ocs_ci.helpers.helpers import storagecluster_independent_check
+from ocs_ci.framework.pytest_customization.marks import skipif_osd_platform
 
 
 logger = logging.getLogger(__name__)
 
 
 @tier1
+@skipif_osd_platform
 @pytest.mark.post_ocp_upgrade
 @pytest.mark.first
 @pytest.mark.polarion_id("OCS-1261")

@@ -14,6 +14,7 @@ from ocs_ci.ocs.bucket_utils import (
     complete_multipart_upload,
     sync_object_directory,
 )
+from ocs_ci.framework.pytest_customization.marks import skipif_osd_platform
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +52,7 @@ class TestS3MultipartUpload(MCGTest):
     """
 
     @pytest.mark.polarion_id("OCS-1387")
+    @skipif_osd_platform
     @tier1
     def test_multipart_upload_operations(self, mcg_obj, awscli_pod, bucket_factory):
         """

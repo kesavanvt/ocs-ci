@@ -14,6 +14,7 @@ from ocs_ci.ocs.bucket_utils import (
     sync_object_directory,
 )
 from ocs_ci.ocs.resources.objectbucket import OBC
+from ocs_ci.framework.pytest_customization.marks import skipif_osd_platform
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +47,7 @@ def setup(pod_obj, rgw_bucket_factory):
     return bucket, object_key, origin_dir, res_dir, full_object_path, parts
 
 
+@skipif_osd_platform
 class TestS3MultipartUpload(ManageTest):
     """
     Test Multipart upload on RGW buckets
