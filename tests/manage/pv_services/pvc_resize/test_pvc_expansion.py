@@ -178,7 +178,7 @@ class TestPvcExpand(ManageTest):
         Verify PVC expand feature
 
         """
-        pvc_size_new = 25
+        pvc_size_new = 15
 
         # Modify size of PVCs and verify the change
         log.info(f"Expanding PVCs to {pvc_size_new}G")
