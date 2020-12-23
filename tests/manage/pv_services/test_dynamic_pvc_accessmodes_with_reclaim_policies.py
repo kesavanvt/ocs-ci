@@ -7,6 +7,7 @@ from ocs_ci.ocs.exceptions import UnexpectedBehaviour
 from ocs_ci.ocs.resources import pod
 from ocs_ci.utility.retry import retry
 from ocs_ci.helpers import helpers
+from ocs_ci.framework.pytest_customization.marks import skipif_openshift_dedicated
 
 logger = logging.getLogger(__name__)
 
@@ -68,6 +69,7 @@ class TestDynamicPvc(ManageTest):
             )
 
     @acceptance
+    @skipif_openshift_dedicated
     @tier1
     @pytest.mark.parametrize(
         argnames=["interface_type", "reclaim_policy"],
@@ -202,6 +204,7 @@ class TestDynamicPvc(ManageTest):
         )
 
     @acceptance
+    @skipif_openshift_dedicated
     @tier1
     @pytest.mark.bugzilla("1750916")
     @pytest.mark.bugzilla("1751866")

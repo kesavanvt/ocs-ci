@@ -12,6 +12,8 @@ from ocs_ci.framework.testlib import (
     skipif_upgraded_from,
 )
 from ocs_ci.helpers import helpers
+from ocs_ci.framework import config
+from ocs_ci.framework.pytest_customization.marks import skipif_openshift_dedicated
 
 log = logging.getLogger(__name__)
 
@@ -172,13 +174,17 @@ class TestPvcExpand(ManageTest):
             log.info(f"Verified {io_phase} IO on pod {pod_obj.name}.")
 
     @acceptance
+    @skipif_openshift_dedicated
     @pytest.mark.polarion_id("OCS-2219")
     def test_pvc_expansion(self):
         """
         Verify PVC expand feature
 
         """
-        pvc_size_new = 25
+        if config.ENV_DATA["platform"].lower() == "openshiftdedicated":
+            pvc_size_new = 15
+        else:
+            pvc_size_new = 25
 
         # Modify size of PVCs and verify the change
         log.info(f"Expanding PVCs to {pvc_size_new}G")

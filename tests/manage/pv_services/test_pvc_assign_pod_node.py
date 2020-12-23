@@ -8,6 +8,7 @@ from ocs_ci.ocs import constants
 from ocs_ci.ocs.node import get_worker_nodes
 from ocs_ci.ocs.resources import pod
 from ocs_ci.helpers import helpers
+from ocs_ci.framework.pytest_customization.marks import skipif_openshift_dedicated
 
 logger = logging.getLogger(__name__)
 
@@ -22,6 +23,7 @@ class TestPvcAssignPodNode(ManageTest):
     """
 
     @acceptance
+    @skipif_openshift_dedicated
     @tier1
     @pytest.mark.parametrize(
         argnames=["interface"],
@@ -75,6 +77,7 @@ class TestPvcAssignPodNode(ManageTest):
         pod.get_fio_rw_iops(pod_obj)
 
     @acceptance
+    @skipif_openshift_dedicated
     @tier1
     @pytest.mark.parametrize(
         argnames=["interface"],
