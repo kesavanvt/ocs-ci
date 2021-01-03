@@ -1,4 +1,4 @@
-<testsuites>
+<testsuite>
     <properties>
         <property name="polarion-project-id" value="CEPH"/>
         <property name="polarion-testrun-id" value="{{tc['test_run_id']}}"/>
@@ -12,4 +12,4 @@
     </properties>
     </testcase>
     </testsuite>
-</testsuites>
+</testsuite>
