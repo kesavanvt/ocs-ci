@@ -7,6 +7,7 @@ from ocs_ci.ocs.resources.pod import get_fio_rw_iops
 from ocs_ci.framework.testlib import tier1, ManageTest, acceptance
 from ocs_ci.ocs import constants, node
 from ocs_ci.helpers import helpers
+from ocs_ci.framework import config
 
 log = logging.getLogger(__name__)
 
@@ -55,7 +56,13 @@ class TestRawBlockPV(ManageTest):
         """
         worker_nodes = node.get_worker_nodes()
         pvcs = list()
-        for size in ["500Mi", "10Gi", "1Ti"]:
+        size_mb = "500Mi"
+        size_gb = "10Gi"
+        if config.ENV_DATA["platform"].lower() == "openshiftdedicated":
+            size_tb = "0.05Ti"
+        else:
+            size_tb = "1Ti"
+        for size in [size_mb, size_gb, size_tb]:
             pvcs.append(
                 helpers.create_pvc(
                     sc_name=self.sc_obj.name,
