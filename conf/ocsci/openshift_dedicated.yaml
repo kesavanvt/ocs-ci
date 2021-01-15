@@ -2,6 +2,16 @@
 ENV_DATA:
   platform: 'openshiftdedicated'
   deployment_type: 'managed'
+  addon_id: 'ocs-converged'
+  configs: 'aws,stage'
+  worker_instance_type: 'm5.2xlarge'
+  worker_replicas: '6'
+  cluster_expiry_in_minutes: '600'
+  skip_ocs_deployment: true
+
+# AUTH:
+#  openshiftdedicated:
+#    token: OCM TOKEN KEY PLACEHOLDER
 
 DEPLOYMENT:
   ocs_csv_channel: "alpha"
