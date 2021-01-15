@@ -68,6 +68,8 @@ def init_ocsci_conf(arguments=None):
     parser.add_argument("--flexy-env-file", default="", help="Path to flexy env file")
     args, unknown = parser.parse_known_args(args=arguments)
     ocs_version = args.ocs_version
+    if framework.config.ENV_DATA["platform"].lower() == "openshiftdedicated":
+        ocs_version = None
     load_config(args.ocsci_conf)
     ocs_registry_image = framework.config.DEPLOYMENT.get("ocs_registry_image")
     if args.ocs_registry_image:
