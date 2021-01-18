@@ -18,12 +18,14 @@ from ocs_ci.ocs import metrics
 from ocs_ci.ocs.resources import pod
 from ocs_ci.utility.prometheus import PrometheusAPI, check_query_range_result_enum
 from ocs_ci.helpers.helpers import storagecluster_independent_check
+from ocs_ci.framework.pytest_customization.marks import skipif_openshift_dedicated
 
 
 logger = logging.getLogger(__name__)
 
 
 @tier1
+@skipif_openshift_dedicated
 @pytest.mark.post_ocp_upgrade
 @pytest.mark.first
 @pytest.mark.polarion_id("OCS-1261")
@@ -73,6 +75,7 @@ def test_monitoring_enabled():
 
 
 @tier1
+@skipif_openshift_dedicated
 @pytest.mark.polarion_id("OCS-1265")
 def test_ceph_mgr_dashboard_not_deployed():
     """
@@ -107,6 +110,7 @@ def test_ceph_mgr_dashboard_not_deployed():
 @skipif_ocs_version("<4.6")
 @metrics_for_external_mode_required
 @tier1
+@skipif_openshift_dedicated
 @pytest.mark.bugzilla("1779336")
 @pytest.mark.polarion_id("OCS-1267")
 def test_ceph_rbd_metrics_available():
@@ -126,6 +130,7 @@ def test_ceph_rbd_metrics_available():
 
 
 @tier1
+@skipif_openshift_dedicated
 @metrics_for_external_mode_required
 @pytest.mark.polarion_id("OCS-1268")
 def test_ceph_metrics_available():
@@ -151,6 +156,7 @@ def test_ceph_metrics_available():
 
 
 @tier1
+@skipif_openshift_dedicated
 @metrics_for_external_mode_required
 @pytest.mark.post_ocp_upgrade
 @pytest.mark.polarion_id("OCS-1302")
