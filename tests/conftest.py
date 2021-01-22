@@ -2816,6 +2816,8 @@ def ceph_toolbox(request):
     deploy = config.RUN["cli_params"]["deploy"]
     teardown = config.RUN["cli_params"].get("teardown")
     skip_ocs = config.ENV_DATA["skip_ocs_deployment"]
+    if config.ENV_DATA["platform"].lower() == "openshiftdedicated":
+        skip_ocs = False
     if not (deploy or teardown or skip_ocs):
         try:
             # Creating toolbox pod
