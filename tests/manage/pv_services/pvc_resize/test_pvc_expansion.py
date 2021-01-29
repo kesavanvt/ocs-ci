@@ -196,8 +196,12 @@ class TestPvcExpand(ManageTest):
         Verify PVC expand of already expanded PVC
 
         """
-        pvc_size_expanded_1 = 20
-        pvc_size_expanded_2 = 25
+        if config.ENV_DATA["platform"].lower() == "openshiftdedicated":
+            pvc_size_expanded_1 = 19
+            pvc_size_expanded_2 = 20
+        else:
+            pvc_size_expanded_1 = 20
+            pvc_size_expanded_2 = 25
         executor = ThreadPoolExecutor(max_workers=len(self.pods))
 
         # Do setup on pods for running IO
